@@ -18,6 +18,10 @@ const transporter = nodemailer.createTransport({
   },
 });
 
+app.get("/", (_req: Request, res: Response) => {
+  res.send("hello from ts api");
+});
+
 app.post("/send-email", (req: Request, res: Response) => {
   const { name, email, message } = req.body;
 
@@ -40,10 +44,6 @@ app.post("/send-email", (req: Request, res: Response) => {
       }
     }
   );
-});
-
-app.get("/", (res: Response) => {
-  res.send("hello from ts api");
 });
 
 app.listen(port, () => {
