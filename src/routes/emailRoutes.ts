@@ -1,29 +1,17 @@
 import express, { Request, Response } from "express";
-import nodemailer, { SentMessageInfo } from "nodemailer";
 
+import { executeSendEmail } from "../utils/nodemailer";
+
+// init email router
 const emailRouter = express.Router();
 
+// defining email routes
 emailRouter.post("/send", (req: Request, res: Response) => {
-  // parse contact info from request body
+  // parse contact info from request payload
   const { contactName, contactEmail, contactEmailMessage } = req.body;
 
-  // - log into email service provider
-  // - this is what emailer_api will leverage for email funtions
-  const transporter = nodemailer.createTransport({
-    service: process.env.ACCOUNT_EMAIL_SERVICE,
-    auth: {
-      user: process.env.ACCOUNT_EMAIL_ADDRESS,
-      pass: process.env.ACCOUNT_EMAIL_PASSWORD,
-    },
-  });
-
-  // - intit mail options
-  // - email will be sent to vendor email, and will contain contact info
-  //   parsed from request body
-  const mailOptions = {
-    to: process.env.VENDOR_EMAIL,
-    subject: process.env.VENDOR_EMAIL_SUBJECT,
-    text: `
+  // generate email format string with contact info
+  const emailFormatStr = `
       Contact Info
       - Name: ${contactName}
       - Email: ${contactEmail}
@@ -33,24 +21,16 @@ emailRouter.post("/send", (req: Request, res: Response) => {
       ------------------------
       AUTOMATED EMAIL
       ACCOUNT IS NOT MONITORED
-    `,
-  };
+    `;
 
-  // send email
-  transporter.sendMail(
-    mailOptions,
-    (error: Error | null, info: SentMessageInfo) => {
-      if (error) {
-        // email send error
-        console.log(error);
-        res.status(500).send({ message: "Email could not be sent." });
-      } else {
-        // email sent
-        console.log("Email send: " + info.response);
-        res.send({ message: "Email sent successfully." });
-      }
-    }
-  );
+  // execute send email process
+  executeSendEmail(emailFormatStr)
+    .then(() => {
+      res.status(200).send({ message: "Email sent successfully." });
+    })
+    .catch(() => {
+      res.status(500).send({ message: "Email could not be send" });
+    });
 });
 
 export default emailRouter;
