@@ -8,14 +8,14 @@ import router from "./routes/routes";
 dotenv.config({ path: "configs/.env" });
 
 const app = express();
-const port = process.env.PORT || 3020;
+const port = process.env.PORT;
 
 
 // NOTE - will need to verify this works
-const allowedOrigins = [""];
+const allowedOrigin = [`${process.env.ALLOWED_ORIGIN}`];
 
 app.use(cors({
-  origin: allowedOrigins
+  origin: allowedOrigin
 }))
 
 app.use(bodyParser.urlencoded({ extended: true }));
