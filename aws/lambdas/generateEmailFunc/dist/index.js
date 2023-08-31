@@ -38,8 +38,6 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.handler = void 0;
 var nodemailer_1 = require("./nodemailer");
-console.log("ran");
-// exports.handler = async (event: APIGatewayEvent) => {
 var handler = function (event) { return __awaiter(void 0, void 0, void 0, function () {
     var req, _a, contactName, contactEmail, contactEmailMessage, emailFormatStr, error_1;
     return __generator(this, function (_b) {
