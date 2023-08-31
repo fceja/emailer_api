@@ -4,7 +4,6 @@ import { executeSendEmail } from "./nodemailer";
 export const handler = async (
   event: APIGatewayEvent
 ): Promise<APIGatewayProxyResult> => {
-  console.log("called exports handler");
   try {
     const req = event.body ? JSON.parse(event.body) : {} || {};
     const { contactName, contactEmail, contactEmailMessage } = req.body;
