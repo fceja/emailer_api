@@ -4,9 +4,6 @@ exports.executeSendEmail = void 0;
 var nodemailer = require("nodemailer");
 // return transporter object with configs for email service provider
 var getTransporter = function () {
-    console.log("process.env.ACCOUNT_EMAIL_SERVICE", process.env.ACCOUNT_EMAIL_SERVICE);
-    console.log("process.env.ACCOUNT_EMAIL_ADDRESS", process.env.ACCOUNT_EMAIL_ADDRESS);
-    console.log("process.env.ACCOUNT_EMAIL_PASSWORD", process.env.ACCOUNT_EMAIL_PASSWORD);
     return nodemailer.createTransport({
         service: process.env.ACCOUNT_EMAIL_SERVICE,
         auth: {
