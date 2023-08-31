@@ -43,29 +43,26 @@ var handler = function (event) { return __awaiter(void 0, void 0, void 0, functi
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
-                console.log("called exports handler");
-                _b.label = 1;
-            case 1:
-                _b.trys.push([1, 3, , 4]);
+                _b.trys.push([0, 2, , 3]);
                 req = event.body ? JSON.parse(event.body) : {} || {};
                 _a = req.body, contactName = _a.contactName, contactEmail = _a.contactEmail, contactEmailMessage = _a.contactEmailMessage;
                 emailFormatStr = "\n      Contact Info\n      - Name: ".concat(contactName, "\n      - Email: ").concat(contactEmail, "\n      - Message: ").concat(contactEmailMessage, "\n\n\n      ------------------------\n      AUTOMATED EMAIL\n      ACCOUNT IS NOT MONITORED\n    ");
                 // execute send email process
                 return [4 /*yield*/, (0, nodemailer_1.executeSendEmail)(emailFormatStr)];
-            case 2:
+            case 1:
                 // execute send email process
                 _b.sent();
                 return [2 /*return*/, {
                         statusCode: 200,
                         body: JSON.stringify({ message: "Email sent successfully." }),
                     }];
-            case 3:
+            case 2:
                 error_1 = _b.sent();
                 return [2 /*return*/, {
                         statusCode: 500,
                         body: JSON.stringify({ message: "Email could not be sent." }),
                     }];
-            case 4: return [2 /*return*/];
+            case 3: return [2 /*return*/];
         }
     });
 }); };
