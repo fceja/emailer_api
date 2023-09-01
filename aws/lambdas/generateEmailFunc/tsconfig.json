@@ -5,8 +5,10 @@
     "noImplicitReturns": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
+    "module": "CommonJS",
+    "moduleResolution": "node",
     "outDir": "./dist",
     "strict": true,
-    "strictNullChecks": true,
+    "strictNullChecks": true
   }
 }

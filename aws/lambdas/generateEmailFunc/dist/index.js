@@ -36,34 +36,42 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.handler = void 0;
-var nodemailer_1 = require("./nodemailer");
-var handler = function (event) { return __awaiter(void 0, void 0, void 0, function () {
-    var req, _a, contactName, contactEmail, contactEmailMessage, emailFormatStr, error_1;
-    return __generator(this, function (_b) {
-        switch (_b.label) {
+var myNodemailer_1 = require("./lib/myNodemailer");
+exports.handler = function (event) { return __awaiter(void 0, void 0, void 0, function () {
+    var payload, contactName, contactEmail, contactEmailMessage, emailFormatStr, error_1;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
             case 0:
-                _b.trys.push([0, 2, , 3]);
-                req = event.body ? JSON.parse(event.body) : {} || {};
-                _a = req.body, contactName = _a.contactName, contactEmail = _a.contactEmail, contactEmailMessage = _a.contactEmailMessage;
-                emailFormatStr = "\n      Contact Info\n      - Name: ".concat(contactName, "\n      - Email: ").concat(contactEmail, "\n      - Message: ").concat(contactEmailMessage, "\n\n\n      ------------------------\n      AUTOMATED EMAIL\n      ACCOUNT IS NOT MONITORED\n    ");
-                // execute send email process
-                return [4 /*yield*/, (0, nodemailer_1.executeSendEmail)(emailFormatStr)];
+                console.log("event:", event);
+                payload = event.body ? JSON.parse(event.body) : {} || {};
+                console.log("payload:", payload);
+                contactName = payload.contactName, contactEmail = payload.contactEmail, contactEmailMessage = payload.contactEmailMessage;
+                emailFormatStr = "\n    Contact Info\n    - Name: ".concat(contactName, "\n    - Email: ").concat(contactEmail, "\n    - Message: ").concat(contactEmailMessage, "\n\n\n    ------------------------\n    AUTOMATED EMAIL\n    ACCOUNT IS NOT MONITORED\n  ");
+                console.log('executeSendEmail', myNodemailer_1.executeSendEmail);
+                _a.label = 1;
             case 1:
+                _a.trys.push([1, 3, , 4]);
                 // execute send email process
-                _b.sent();
+                return [4 /*yield*/, (0, myNodemailer_1.executeSendEmail)(emailFormatStr)];
+            case 2:
+                // execute send email process
+                _a.sent();
                 return [2 /*return*/, {
                         statusCode: 200,
                         body: JSON.stringify({ message: "Email sent successfully." }),
                     }];
-            case 2:
-                error_1 = _b.sent();
+            case 3:
+                error_1 = _a.sent();
+                console.log('error', error_1);
                 return [2 /*return*/, {
                         statusCode: 500,
-                        body: JSON.stringify({ message: "Email could not be sent." }),
+                        body: JSON.stringify({
+                            message: "Email could not be sent.",
+                            emailFormatStr: emailFormatStr,
+                            text: error_1,
+                        }),
                     }];
-            case 3: return [2 /*return*/];
+            case 4: return [2 /*return*/];
         }
     });
 }); };
-exports.handler = handler;
