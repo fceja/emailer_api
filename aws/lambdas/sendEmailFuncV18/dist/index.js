@@ -42,12 +42,10 @@ exports.handler = function (event) { return __awaiter(void 0, void 0, void 0, fu
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                console.log("event:", event);
                 payload = event.body ? JSON.parse(event.body) : {} || {};
-                console.log("payload:", payload);
                 contactName = payload.contactName, contactEmail = payload.contactEmail, contactEmailMessage = payload.contactEmailMessage;
+                console.log("payload:", payload);
                 emailFormatStr = "\n    Contact Info\n    - Name: ".concat(contactName, "\n    - Email: ").concat(contactEmail, "\n    - Message: ").concat(contactEmailMessage, "\n\n\n    ------------------------\n    AUTOMATED EMAIL\n    ACCOUNT IS NOT MONITORED\n  ");
-                console.log('executeSendEmail', myNodemailer_1.executeSendEmail);
                 _a.label = 1;
             case 1:
                 _a.trys.push([1, 3, , 4]);
@@ -62,7 +60,7 @@ exports.handler = function (event) { return __awaiter(void 0, void 0, void 0, fu
                     }];
             case 3:
                 error_1 = _a.sent();
-                console.log('error', error_1);
+                console.log("error", error_1);
                 return [2 /*return*/, {
                         statusCode: 500,
                         body: JSON.stringify({

@@ -1,5 +1,5 @@
 {
-    "name": "layer_generate_email_func",
+    "name": "layer_send_email_func_v18",
     "dependencies": {
       "nodemailer": "^6.9.4"
     }

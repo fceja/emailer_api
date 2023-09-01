@@ -11,14 +11,12 @@ var getTransporter = function () {
             pass: process.env.ACCOUNT_EMAIL_PASSWORD,
         },
     };
-    console.log("transportData: ", transportData);
     try {
         var transport = (0, nodemailer_1.createTransport)(transportData);
-        console.log("transport: ", transport);
         return transport;
     }
     catch (error) {
-        console.log("transport error: ", error);
+        console.log("error: ", error);
         return { error: error };
     }
 };
@@ -45,11 +43,9 @@ var sendEmail = function (mailOptions, transporter) {
 var executeSendEmail = function (emailFormatStr) {
     // init objects to send email
     var mailOptionsObj = getMailOptions(emailFormatStr);
-    console.log("mailOptionsObj:", mailOptionsObj);
     var transporterObj = getTransporter();
-    console.log("transporterObj:", transporterObj);
     var resp = sendEmail(mailOptionsObj, transporterObj);
-    console.log("resp", resp);
+    console.log("response", resp);
     return resp;
 };
 exports.executeSendEmail = executeSendEmail;
