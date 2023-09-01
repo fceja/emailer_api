@@ -1,0 +1,6 @@
+{
+    "name": "layer_generate_email_func",
+    "dependencies": {
+      "nodemailer": "^6.9.4"
+    }
+  }
