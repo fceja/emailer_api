@@ -1,6 +1,13 @@
 import type { APIGatewayEvent, APIGatewayProxyResult } from "aws-lambda";
 import { executeSendEmail } from "./lib/myNodemailer";
 
+const returnError = () => ({
+  statusCode: 500,
+  body: JSON.stringify({
+    message: "Email could not be sent.",
+  }),
+});
+
 exports.handler = async (
   event: APIGatewayEvent
 ): Promise<APIGatewayProxyResult> => {
@@ -8,6 +15,10 @@ exports.handler = async (
   const { contactName, contactEmail, contactEmailMessage } = payload;
 
   console.log("payload:", payload);
+
+  if (!contactName || !contactEmail || contactEmailMessage) {
+    return returnError();
+  }
 
   // generate email format string with contact info
   const emailFormatStr = `
@@ -32,13 +43,6 @@ exports.handler = async (
     };
   } catch (error) {
     console.log("error", error);
-    return {
-      statusCode: 500,
-      body: JSON.stringify({
-        message: "Email could not be sent.",
-        emailFormatStr: emailFormatStr,
-        text: error,
-      }),
-    };
+    return returnError();
   }
 };
