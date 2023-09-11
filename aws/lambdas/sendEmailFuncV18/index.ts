@@ -14,9 +14,7 @@ exports.handler = async (
   const payload = event.body ? JSON.parse(event.body) : {} || {};
   const { contactName, contactEmail, contactEmailMessage } = payload;
 
-  console.log("payload:", payload);
-
-  if (!contactName || !contactEmail || contactEmailMessage) {
+  if (!contactName || !contactEmail || !contactEmailMessage) {
     return returnError();
   }
 
@@ -39,6 +37,10 @@ exports.handler = async (
 
     return {
       statusCode: 200,
+      headers: {
+        "Access-Control-Allow-Origin":
+          `${process.env.ACCESS_CONTROL_ALLOW_ORIGIN}`,
+      },
       body: JSON.stringify({ message: "Email sent successfully." }),
     };
   } catch (error) {

@@ -37,6 +37,12 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var myNodemailer_1 = require("./lib/myNodemailer");
+var returnError = function () { return ({
+    statusCode: 500,
+    body: JSON.stringify({
+        message: "Email could not be sent.",
+    }),
+}); };
 exports.handler = function (event) { return __awaiter(void 0, void 0, void 0, function () {
     var payload, contactName, contactEmail, contactEmailMessage, emailFormatStr, error_1;
     return __generator(this, function (_a) {
@@ -45,6 +51,9 @@ exports.handler = function (event) { return __awaiter(void 0, void 0, void 0, fu
                 payload = event.body ? JSON.parse(event.body) : {} || {};
                 contactName = payload.contactName, contactEmail = payload.contactEmail, contactEmailMessage = payload.contactEmailMessage;
                 console.log("payload:", payload);
+                if (!contactName || !contactEmail || !contactEmailMessage) {
+                    return [2 /*return*/, returnError()];
+                }
                 emailFormatStr = "\n    Contact Info\n    - Name: ".concat(contactName, "\n    - Email: ").concat(contactEmail, "\n    - Message: ").concat(contactEmailMessage, "\n\n\n    ------------------------\n    AUTOMATED EMAIL\n    ACCOUNT IS NOT MONITORED\n  ");
                 _a.label = 1;
             case 1:
@@ -56,19 +65,17 @@ exports.handler = function (event) { return __awaiter(void 0, void 0, void 0, fu
                 _a.sent();
                 return [2 /*return*/, {
                         statusCode: 200,
+                        headers: {
+                            // "Access-Control-Allow-Origin": "https://60m0upu4gb.execute-api.us-west-1.amazonaws.com"
+                            // "Access-Control-Allow-Origin": "https://60m0upu4gb.execute-api.us-west-1.amazonaws.com/dev/sendEmail"
+                            "Access-Control-Allow-Origin": "http://dev.fe-pops-and-sons-electric.fc.s3-website-us-west-1.amazonaws.com"
+                        },
                         body: JSON.stringify({ message: "Email sent successfully." }),
                     }];
             case 3:
                 error_1 = _a.sent();
                 console.log("error", error_1);
-                return [2 /*return*/, {
-                        statusCode: 500,
-                        body: JSON.stringify({
-                            message: "Email could not be sent.",
-                            emailFormatStr: emailFormatStr,
-                            text: error_1,
-                        }),
-                    }];
+                return [2 /*return*/, returnError()];
             case 4: return [2 /*return*/];
         }
     });
