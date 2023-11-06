@@ -50,7 +50,6 @@ exports.handler = function (event) { return __awaiter(void 0, void 0, void 0, fu
             case 0:
                 payload = event.body ? JSON.parse(event.body) : {} || {};
                 contactName = payload.contactName, contactEmail = payload.contactEmail, contactEmailMessage = payload.contactEmailMessage;
-                console.log("payload:", payload);
                 if (!contactName || !contactEmail || !contactEmailMessage) {
                     return [2 /*return*/, returnError()];
                 }
@@ -66,9 +65,7 @@ exports.handler = function (event) { return __awaiter(void 0, void 0, void 0, fu
                 return [2 /*return*/, {
                         statusCode: 200,
                         headers: {
-                            // "Access-Control-Allow-Origin": "https://60m0upu4gb.execute-api.us-west-1.amazonaws.com"
-                            // "Access-Control-Allow-Origin": "https://60m0upu4gb.execute-api.us-west-1.amazonaws.com/dev/sendEmail"
-                            "Access-Control-Allow-Origin": "http://dev.fe-pops-and-sons-electric.fc.s3-website-us-west-1.amazonaws.com"
+                            "Access-Control-Allow-Origin": "".concat(process.env.ACCESS_CONTROL_ALLOW_ORIGIN),
                         },
                         body: JSON.stringify({ message: "Email sent successfully." }),
                     }];
