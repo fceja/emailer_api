@@ -1,6 +1,7 @@
 import express, { Request, Response } from "express";
 
 import { executeSendEmail } from "../utils/nodemailer";
+import { composeEmail } from "../utils/composeEmail";
 
 // init email router
 const emailRouter = express.Router();
@@ -10,18 +11,12 @@ emailRouter.post("/send", (req: Request, res: Response) => {
   // parse contact info from request payload
   const { contactName, contactEmail, contactEmailMessage } = req.body;
 
-  // generate email format string with contact info
-  const emailFormatStr = `
-      Contact Info
-      - Name: ${contactName}
-      - Email: ${contactEmail}
-      - Message: ${contactEmailMessage}
-
-
-      ------------------------
-      AUTOMATED EMAIL
-      ACCOUNT IS NOT MONITORED
-    `;
+  // compose email message with contact info
+  const emailFormatStr = composeEmail(
+    contactName,
+    contactEmail,
+    contactEmailMessage
+  );
 
   // execute send email process
   executeSendEmail(emailFormatStr)
