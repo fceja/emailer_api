@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 import express from "express";
 import cors from "cors";
 
-import router from "./routes/routes";
+import indexRouter from "@routers/indexRouter";
 
 dotenv.config({ path: ".env" });
 
@@ -21,7 +21,7 @@ app.use(
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-app.use("/", router);
+app.use("/", indexRouter);
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
