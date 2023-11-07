@@ -11,7 +11,7 @@ const app = express();
 const port = process.env.PORT;
 
 // set allowed origins
-const allowedOrigins = [`${process.env.ALLOWED_ORIGIN}`];
+const allowedOrigins = [`${process.env.ALLOWED_ORIGINS}`];
 app.use(
   cors({
     origin: allowedOrigins,

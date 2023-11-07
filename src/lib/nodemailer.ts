@@ -1,20 +1,20 @@
 import nodemailer, { SentMessageInfo } from "nodemailer";
 
-// return transporter object with configs for email service provider
+// return transporter object with configs for email forwarding service provider
 const getTransporter = () => {
   return nodemailer.createTransport({
-    service: process.env.ACCOUNT_EMAIL_SERVICE,
+    service: process.env.EMAIL_FORWARDING_SERVICE,
     auth: {
-      user: process.env.ACCOUNT_EMAIL_ADDRESS,
-      pass: process.env.ACCOUNT_EMAIL_PASSWORD,
+      user: process.env.EMAIL_FORWARDING_SERVICE_ACCOUNT_EMAIL,
+      pass: process.env.EMAIL_FORWARDING_SERVICE_ACCOUNT_PASSWORD,
     },
   });
 };
 
-// return object with email properties to be sent
+// return object with email properties for recipient
 const getMailOptions = (emailFormatStr: String) => ({
-  to: process.env.VENDOR_EMAIL,
-  subject: process.env.VENDOR_EMAIL_SUBJECT,
+  to: process.env.RECIPIENT_EMAIL,
+  subject: process.env.RECIPIENT_EMAIL_SUBJECT,
   text: `${emailFormatStr}`,
 });
 
