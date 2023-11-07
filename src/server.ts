@@ -10,13 +10,13 @@ dotenv.config({ path: ".env" });
 const app = express();
 const port = process.env.PORT;
 
-
-// NOTE - will need to verify this works
 const allowedOrigin = [`${process.env.ALLOWED_ORIGIN}`];
 
-app.use(cors({
-  origin: allowedOrigin
-}))
+app.use(
+  cors({
+    origin: allowedOrigin,
+  })
+);
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
