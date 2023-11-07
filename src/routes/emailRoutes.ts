@@ -1,6 +1,6 @@
 import express, { Request, Response } from "express";
 
-import { executeSendEmail } from "@utils/nodemailer";
+import { executeSendEmail } from "@lib/nodemailer";
 import { composeEmail } from "@utils/composeEmail";
 
 // init email router
