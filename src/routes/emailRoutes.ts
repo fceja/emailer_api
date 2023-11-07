@@ -1,7 +1,7 @@
 import express, { Request, Response } from "express";
 
-import { executeSendEmail } from "../utils/nodemailer";
-import { composeEmail } from "../utils/composeEmail";
+import { executeSendEmail } from "@utils/nodemailer";
+import { composeEmail } from "@utils/composeEmail";
 
 // init email router
 const emailRouter = express.Router();
