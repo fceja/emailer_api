@@ -3,13 +3,13 @@ import express, { Request, Response } from "express";
 import emailRouter from "@/routers/email/emailRouter";
 
 // init router
-const router = express.Router();
+const indexRouter = express.Router();
 
 // routes
-router.get("/", (_req: Request, res: Response) => {
+indexRouter.get("/", (_req: Request, res: Response) => {
   res.json({ message: "response from ts api" });
 });
 
-router.use("/email", emailRouter);
+indexRouter.use("/email", emailRouter);
 
-export default router;
+export default indexRouter;
