@@ -1,20 +1,20 @@
 {
   "compilerOptions": {
-    "target": "ES6",
-    "module": "CommonJS",
-    "outDir": "./dist",
-    "rootDir": "./",
-    "strict": true,
-    "esModuleInterop": true,
-    "moduleResolution": "node",
     "baseUrl": "./src",
-    "sourceMap": true,
+    "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
+    "module": "CommonJS",
+    "moduleResolution": "node",
     "noImplicitAny": true,
-    "strictNullChecks": true,
+    "noImplicitReturns": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noImplicitReturns": true,
-    "skipLibCheck": true
+    "outDir": "./dist",
+    "rootDir": "./",
+    "skipLibCheck": true,
+    "sourceMap": true,
+    "strictNullChecks": true,
+    "strict": true,
+    "target": "ES6"
   }
 }
