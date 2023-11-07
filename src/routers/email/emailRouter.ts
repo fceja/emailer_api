@@ -1,6 +1,6 @@
 import express from "express";
 
-import emailSendHandler from "@/routes/email/emailSendHandler";
+import emailSendHandler from "@/routes/email/send/emailSendHandler";
 
 // init email router
 const emailRouter = express.Router();
