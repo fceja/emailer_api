@@ -12,14 +12,14 @@ emailRouter.post("/send", (req: Request, res: Response) => {
   const { contactName, contactEmail, contactEmailMessage } = req.body;
 
   // compose email message with contact info
-  const emailFormatStr = composeEmail(
+  const emailMessage = composeEmail(
     contactName,
     contactEmail,
     contactEmailMessage
   );
 
   // execute send email process
-  executeSendEmail(emailFormatStr)
+  executeSendEmail(emailMessage)
     .then(() => {
       res.status(200).send({ message: "Email sent successfully." });
     })
