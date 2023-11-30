@@ -23,25 +23,27 @@ const sendEmail = (
   mailOptions: nodemailer.SendMailOptions,
   transporter: nodemailer.Transporter
 ) => {
-  return new Promise<void>((resolve, reject) => {
+  return new Promise<string>((resolve, reject) => {
     transporter.sendMail(
       mailOptions,
       (error: Error | null, info: SentMessageInfo) => {
         if (error) {
           reject(error);
         } else {
-          console.log("Email send: " + info.response);
-          resolve();
+          console.log("Email sent: " + info.response);
+          resolve(info.response);
         }
       }
     );
   });
 };
 
-export const executeSendEmail = (emailFormatStr: String) => {
+export const executeSendEmail = async (emailFormatStr: String) => {
   // init objects to send email
   const mailOptionsObj = getMailOptions(emailFormatStr);
   const transporterObj = getTransporter();
 
-  return sendEmail(mailOptionsObj, transporterObj);
+  const result = await sendEmail(mailOptionsObj, transporterObj);
+
+  return result.includes("2.0.0");
 };
