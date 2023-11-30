@@ -1,9 +1,0 @@
-{
-  "name": "send_email_func_v18",
-  "dependencies": {
-    "@types/aws-lambda": "^8.10.119",
-    "@types/nodemailer": "^6.4.9",
-    "aws-lambda": "^1.0.7",
-    "nodemailer": "^6.9.4"
-  }
-}
