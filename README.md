@@ -2,8 +2,7 @@
 A NodeJS / ExpressJS API that provides an endpoint for email generation.
 
 ## Installation
-![](https://img.shields.io/badge/OS-Linux-informational?style=flat&logo=linux&logoColor=white&color=eaeaea)
-![](https://shields.io/badge/OS-MacOS-informational?style=flat&logo=Apple&logoColor=white&color=eaeaea)
+![](https://img.shields.io/badge/Unix-informational?style=flat&logo=Unix&logoColor=black&color=eaeaea)
 1. Clone repo
 2. Install Node
    - ```https://nodejs.org/en/download```
